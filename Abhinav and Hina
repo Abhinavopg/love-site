@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abhinav ❤️ Hina</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box;}
+body {
+  font-family:'Poppins',sans-serif;
+  background: linear-gradient(120deg,#ff9a9e,#fad0c4);
+  color:#fff;
+  overflow-x:hidden;
+  text-align:center;
+  transition:background 1s ease;
+}
+h1 {font-family:'Great Vibes',cursive;text-shadow:2px 2px 10px #ff69b4;margin-bottom:15px;}
+.card{max-width:450px;margin:50px auto;padding:25px;background:rgba(255,255,255,0.15);border-radius:25px;backdrop-filter:blur(12px);box-shadow:0 0 40px rgba(255,105,180,0.5);position:relative;z-index:1;}
+.card p{margin:12px 0;line-height:1.5em;font-size:1.2em;}
+.love-counter{font-size:2em;margin:15px 0;font-weight:bold;}
+.buttons{margin-top:20px;margin-bottom:50px;}
+.buttons button{padding:12px 25px;margin:10px;font-size:1.2em;border-radius:15px;border:none;cursor:pointer;background:#ff69b4;color:white;box-shadow:0 0 10px #ff69b4;transition:0.2s;position:relative;}
+.buttons button:hover{transform:scale(1.1);background:#ff85c1;}
+#responseMessage{margin-top:20px;font-size:1.2em;min-height:1.5em;}
+.floating,.final-floating{position:fixed;width:100%;height:100%;top:0;left:0;pointer-events:none;z-index:0;}
+.heart,.confetti-piece,.sparkle,.star,.letter,.love-note,.mini-heart,.orbit-note{position:absolute;font-size:24px;animation:float 8s linear infinite;}
+.mini-heart{font-size:18px;color:#fff;text-shadow:0 0 10px #ff69b4;opacity:0.7;}
+.love-note{font-size:16px;color:#fff;text-shadow:0 0 10px #ff69b4;opacity:0.9;}
+.orbit-note{font-size:18px;color:#ffdde1;text-shadow:0 0 10px #ff69b4;pointer-events:none;}
+@keyframes float{0%{transform:translateY(100vh) rotate(0deg);opacity:1;}100%{transform:translateY(-10vh) rotate(360deg);opacity:0;}}
+.final-scene{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(120deg,#ff9a9e,#ff6a88,#ffc3a0);z-index:100;overflow:hidden;transition:opacity 1s;}
+.final-scene h1{position:absolute;top:25%;left:50%;transform:translate(-50%,-50%);font-size:4em;color:#fff;text-shadow:0 0 20px #ff69b4;animation:glow 2s infinite;}
+.final-scene p{position:absolute;top:35%;left:50%;transform:translate(-50%,-50%);font-size:2em;color:#fff;text-shadow:0 0 15px #ff85c1;}
+.final-scene .extra-text{position:absolute;top:45%;left:50%;transform:translate(-50%,-50%);font-size:1.5em;color:#fff;text-shadow:0 0 15px #ffb6c1;line-height:1.6em;}
+@keyframes glow{0%{text-shadow:0 0 10px #ff69b4;}50%{text-shadow:0 0 30px #ff85c1;}100%{text-shadow:0 0 10px #ff69b4;}}
+.letter{font-size:30px;cursor:pointer;}
+#musicOverlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,105,180,0.9);color:white;display:flex;align-items:center;justify-content:center;font-size:1.5em;z-index:999;cursor:pointer;}
+</style>
+</head>
+<body>
+
+<!-- Music overlay -->
+<div id="musicOverlay">Tap to Play Music 🎵</div>
+
+<audio id="bgMusic" loop>
+  <source src="https://orangefreesounds.com/wp-content/uploads/2025/04/Emotional-romantic-piano-music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="floating" id="floating"></div>
+
+<!-- Your love messages -->
+<div class="card section">
+  <h1>Abhinav ❤️ Hina</h1>
+  <p>Hina, you are my sunshine, my happiness, my dream come true.</p>
+  <p>Every moment with you feels magical, like a beautiful endless story.</p>
+  <div class="love-counter">I love you: 0%</div>
+</div>
+
+<div class="card section">
+  <p>I love you more than words, more than stars, and more than my heart can hold.</p>
+  <p>With you, every moment is special. You are my heart, my soul, my joy.</p>
+  <p>You complete me, inspire me, and make me the best version of myself.</p>
+</div>
+
+<div class="card section">
+  <p>Every heartbeat, every thought, every smile—it’s all for you.</p>
+  <p>Poem: Roses are red, violets are blue,<br>Every beat of my heart belongs to you.<br>Forever and always, our love rings true. 💖</p>
+</div>
+
+<!-- Yes/No buttons -->
+<div class="card section">
+  <div class="buttons">
+    <button id="yesBtn">Yes ❤️</button>
+    <button id="noBtn">No 💔</button>
+  </div>
+  <p id="responseMessage"></p>
+</div>
+
+<!-- Full magical scene -->
+<div class="final-scene" id="finalScene">
+  <h1 id="loveTitle">I Love You, Hina! 💖</h1>
+  <p>Forever & Always, Abhinav ❤️</p>
+  <div class="extra-text">
+    "You are my dream, my sunshine, my everything.<br>
+    Every beat of my heart belongs to you.<br>
+    Together, forever, we make magic happen."
+  </div>
+  <div class="final-floating" id="finalFloating"></div>
+</div>
+
+<script>
+const loveCounter=document.querySelector('.love-counter');
+const yesBtn=document.getElementById('yesBtn');
+const noBtn=document.getElementById('noBtn');
+const responseMessage=document.getElementById('responseMessage');
+const floating=document.getElementById('floating');
+const finalScene=document.getElementById('finalScene');
+const finalFloating=document.getElementById('finalFloating');
+const bgMusic=document.getElementById('bgMusic');
+const musicOverlay=document.getElementById('musicOverlay');
+
+// Music play on tap
+musicOverlay.addEventListener('click',()=>{
+  bgMusic.play().catch(()=>{});
+  musicOverlay.style.display='none';
+});
+
+// Love counter
+let love=0;
+function updateCounter(){
+  if(love<100){
+    love++;
+    loveCounter.textContent=`I love you: ${love}% ❤️`;
+    setTimeout(updateCounter,50);
+  } else { loveCounter.textContent="I love you: 100% ❤️💖 Forever!"; }
+}
+updateCounter();
+
+// Floating hearts
+function createFloating(container){
+  const elem=document.createElement('div');
+  const type=['❤️','💖','✨','🌟'][Math.floor(Math.random()*4)];
+  elem.classList.add(type==='✨'||type==='🌟'?'sparkle':'heart');
+  elem.textContent=type;
+  elem.style.left=Math.random()*100+'vw';
+  elem.style.fontSize=(15+Math.random()*25)+'px';
+  container.appendChild(elem);
+  setTimeout(()=>elem.remove(),8000);
+}
+setInterval(()=>createFloating(floating),300);
+
+// Yes click
+yesBtn.addEventListener('click',()=>{
+  responseMessage.textContent="Yay! 💖 You made me the happiest person alive!";
+  document.querySelectorAll('.card').forEach(c=>c.style.display='none');
+  finalScene.style.display='block';
+  finalScene.style.opacity=0;
+  setTimeout(()=>finalScene.style.opacity=1,50);
+
+  setInterval(()=>{
+    const types=['❤️','💖','✨','🌟','💌','mini-heart','orbit-note'];
+    const type=types[Math.floor(Math.random()*types.length)];
+    const e=document.createElement('div');
+    if(type==='mini-heart'){e.classList.add('mini-heart'); e.textContent='A❤️H';}
+    else if(type==='orbit-note'){e.classList.add('orbit-note'); e.textContent='💖';}
+    else if(type==='💌'){e.classList.add('letter'); e.textContent='💌';}
+    else if(type==='✨'||type==='🌟'){e.classList.add('sparkle'); e.textContent=type;}
+    else{e.classList.add('heart'); e.textContent=type;}
+    e.style.left=Math.random()*100+'vw';
+    e.style.top=Math.random()*100+'vh';
+    e.style.fontSize=(15+Math.random()*30)+'px';
+    e.style.cursor='pointer';
+    finalFloating.appendChild(e);
+
+    e.addEventListener('click',()=>{
+      const msg=document.createElement('div');
+      msg.classList.add('love-note');
+      const msgs=[
+        "💖 You are my everything!",
+        "🌸 Forever yours, Hina!",
+        "✨ You light up my world!",
+        "💌 Abhinav loves you endlessly!"
+      ];
+      msg.textContent=msgs[Math.floor(Math.random()*msgs.length)];
+      msg.style.left=e.offsetLeft+'px';
+      msg.style.top=e.offsetTop+'px';
+      finalFloating.appendChild(msg);
+      setTimeout(()=>msg.remove(),3000);
+    });
+    setTimeout(()=>e.remove(),8000);
+  },200);
+
+  let colors=[[255,154,158],[255,106,136],[255,195,160]];
+  setInterval(()=>{let c1=colors[0],c2=colors[1];
+    document.body.style.background=`linear-gradient(120deg,rgb(${c1.join(',')}),rgb(${c2.join(',')}))`;
+    colors.push(colors.shift());
+  },1000);
+});
+
+// No button movement
+noBtn.addEventListener('click',()=>{
+  const x=Math.random()*70, y=Math.random()*70;
+  noBtn.style.position='absolute';
+  noBtn.style.left=x+'%';
+  noBtn.style.top=y+'%';
+});
+</script>
+
+</body>
+</html>
