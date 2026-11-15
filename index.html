@@ -151,7 +151,9 @@ yesBtn.addEventListener('click',()=>{
     else{e.classList.add('heart'); e.textContent=type;}
     e.style.left=Math.random()*100+'vw';
     e.style.top=Math.random()*100+'vh';
-    e.style.fontSize=(15+Math.random()*30)+'px';
+    e.style.fontSize = window.innerWidth <= 480
+  ? (12 + Math.random() * 16) + 'px'
+  : (15 + Math.random() * 30) + 'px';
     e.style.cursor='pointer';
     finalFloating.appendChild(e);
 
@@ -160,7 +162,7 @@ yesBtn.addEventListener('click',()=>{
       msg.classList.add('love-note');
       const msgs=[
         "💖 You are my everything!",
-        "🌸 Forever yours, Hina!",
+        "🌸 Forever yours, chiyaa!",
         "✨ You light up my world!",
         "💌 Abhinav loves you endlessly!"
       ];
