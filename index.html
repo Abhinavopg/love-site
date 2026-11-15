@@ -189,7 +189,52 @@ noBtn.addEventListener('click',()=>{
   noBtn.style.left=x+'%';
   noBtn.style.top=y+'%';
 });
+
+  /* Mobile responsive styling */
+@media screen and (max-width: 480px) {
+  .love-note {
+    font-size: 14px !important;
+    max-width: 85vw;
+    padding: 8px 12px;
+    word-wrap: break-word;
+  }
+
+  .heart {
+    font-size: 20px;
+  }
+
+  .sparkle {
+    font-size: 16px;
+  }
+
+  .letter {
+    font-size: 20px;
+  }
+
+  .mini-heart {
+    font-size: 14px;
+  }
+
+  .orbit-note {
+    font-size: 18px;
+  }
+}
+
+  @media screen and (max-width: 480px) {
+  #finalScene {
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+  }
+
+  #responseMessage {
+    font-size: clamp(18px, 5vw, 24px);
+    line-height: 1.5;
+    text-align: center;
+  }
+}
 </script>
+
 
 </body>
 </html>
